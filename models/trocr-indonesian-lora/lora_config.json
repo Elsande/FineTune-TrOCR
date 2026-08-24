@@ -1,0 +1,8 @@
+{
+  "r": 8,
+  "alpha": 32,
+  "target_modules": [
+    "q_proj",
+    "v_proj"
+  ]
+}
