@@ -50,6 +50,9 @@ Thumbs.db
 #folder data
 Kwitansi/
 
+# Dataset training (besar, ±360MB) — cukup lokal, jangan di-commit
+data/
+
 # folder hasil OCR
 results/
 
