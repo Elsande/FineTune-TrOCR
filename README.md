@@ -1,9 +1,5 @@
 # OCR Kwitansi — GLM-OCR Lokal
 
-Pipeline OCR dokumen/kwitansi Indonesia (cetak & tulisan tangan) menggunakan
-**GLM-OCR** (`zai-org/GLM-OCR`, VLM ±1B) yang dijalankan **100% lokal, in-process,
-tanpa server** (tanpa Ollama/vLLM, tanpa API key, tanpa kredit).
-
 ## Arsitektur
 
 ```

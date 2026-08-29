@@ -49,13 +49,12 @@ Thumbs.db
 
 #folder data
 Kwitansi/
-
 # Dataset training (besar, ±360MB) — cukup lokal, jangan di-commit
 data/
-
 # folder hasil OCR
 results/
 
 # Model weights GLM-OCR lokal (~2,6 GB) — jangan di-commit
 models/glm-ocr/
 *.safetensors
+model.safetensors
