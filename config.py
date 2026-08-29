@@ -23,6 +23,35 @@ PROJECT_DIR = Path(__file__).resolve().parent
 # ---------------------------------------------------------------------------
 # TrOCR (HuggingFace local — microsoft/trocr-base-handwritten)
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# MODEL OCR AKTIF (GLM-OCR lokal default, TrOCR tetap tersedia sebagai backup)
+# ---------------------------------------------------------------------------
+# Nama model di models/registry.py yang dipakai run_batch / run_full_pipeline.
+ACTIVE_OCR_MODEL = os.environ.get("ACTIVE_OCR_MODEL", "GLM-OCR (lokal)")
+
+# ---------------------------------------------------------------------------
+# GLM-OCR (zai-org/GLM-OCR) — in-process via transformers, TANPA server.
+# ---------------------------------------------------------------------------
+# Folder model lokal (berisi config.json + model.safetensors dari HF/ModelScope).
+GLM_OCR_MODEL_PATH = os.environ.get(
+    "GLM_OCR_MODEL_PATH", str(PROJECT_DIR / "models/glm-ocr")
+)
+# "cpu" (default) | "cuda" | "auto"
+GLM_OCR_DEVICE = os.environ.get("GLM_OCR_DEVICE", "cpu")
+# Resize halaman agar sisi terpanjang maksimal ini (px) sebelum OCR satu pass.
+# Menjaga jumlah token visual tetap kecil agar cepat di CPU.
+GLM_OCR_MAX_SIDE = int(os.environ.get("GLM_OCR_MAX_SIDE", "1400"))
+# Max token output per pass OCR.
+GLM_OCR_MAX_NEW_TOKENS = int(os.environ.get("GLM_OCR_MAX_NEW_TOKENS", "512"))
+# True -> bila hasil halaman penuh kosong/terlalu pendek pd dokumen besar,
+# OCR ulang per ZONA (split horizontal) di resolusi asli. (regional OCR)
+GLM_OCR_REGION_FALLBACK = os.environ.get("GLM_OCR_REGION_FALLBACK", "1") == "1"
+# Jumlah zona (band) saat region fallback aktif.
+GLM_OCR_REGION_SPLITS = int(os.environ.get("GLM_OCR_REGION_SPLITS", "3"))
+
+# ---------------------------------------------------------------------------
+# TrOCR (backup) — hanya dipakai bila ACTIVE_OCR_MODEL diarahkan ke TrOCR.
+# ---------------------------------------------------------------------------
 # Set TROCR_MODEL_NAME ke path folder hasil fine-tuning untuk model kwitansi custom.
 # Mis. TROCR_MODEL_NAME="./models/trocr-kwitansi" (folder berisi config.json + pytorch_model.bin).
 # Atau biarkan default untuk pakai model pretrained dari HuggingFace Hub.

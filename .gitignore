@@ -49,3 +49,10 @@ Thumbs.db
 
 #folder data
 Kwitansi/
+
+# folder hasil OCR
+results/
+
+# Model weights GLM-OCR lokal (~2,6 GB) — jangan di-commit
+models/glm-ocr/
+*.safetensors

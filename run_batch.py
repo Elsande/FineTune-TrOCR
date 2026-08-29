@@ -34,7 +34,7 @@ if str(PROJECT_DIR) not in sys.path:
     sys.path.insert(0, str(PROJECT_DIR))
 
 import config
-from models.registry import AVAILABLE_MODELS
+from models.registry import get_ocr_model as make_ocr_model
 from preprocessing.pipeline import preprocess
 from preprocessing.pdf_to_image import pdf_to_image
 from preprocessing.pillow_utils import save_array_as_image
@@ -50,10 +50,10 @@ _LAYOUT: object | None = None
 
 
 def get_ocr_model():
-    """TrOCR singleton — model lokal, tidak perlu API."""
+    """Model OCR singleton — model aktif dari registry (default GLM-OCR lokal)."""
     global _OCR
     if _OCR is None:
-        _OCR = AVAILABLE_MODELS["TrOCR (base-handwritten)"]()
+        _OCR = make_ocr_model()
         _OCR.load()
     return _OCR
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# run.sh — peluncur OCR TrOCR Handwritten Kwitansi (batch CLI)
+# run.sh — peluncur OCR GLM-OCR Kwitansi (batch CLI)
 # Pakai:
 #   ./run.sh                    -> batch SEMUA dokumen contoh
 #   ./run.sh [file1 file2 ...]  -> batch dokumen tertentu

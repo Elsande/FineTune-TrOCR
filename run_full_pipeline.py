@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 run_full_pipeline.py
-====================
-End-to-end: PDF/IMG -> preprocessing -> TrOCR -> field extraction -> save results
+===================
+End-to-end: PDF/IMG -> preprocessing -> OCR (GLM-OCR lokal) -> fields -> save
 
 Usage:
     python run_full_pipeline.py Kwitansi/Kwitansi_Sumber\ Jaya\ Fastindo.jpg
@@ -45,7 +45,7 @@ def extract_fields_from_ocr(ocr_data: dict) -> dict:
         ll = line.lower().strip()
 
         if any(kw in ll for kw in ("kwitansi", "kuitansi", "kwt/")):
-            m = re.search(r"[:\s]([\w/\\-\.]+)", line)
+            m = re.search(r"[:\s]([\w/+.\-]+)", line)
             if m:
                 fields["kwitansi_number"] = m.group(1).strip()
 
@@ -95,7 +95,7 @@ async def run_pipeline(input_path: str):
     print(f"{'='*60}")
 
     # 1. OCR
-    print("\n[1/3] OCR (TrOCR Handwritten)...")
+    print("\n[1/3] OCR...")
     ocr_model = get_ocr_model()
 
     if input_path.suffix.lower() == ".pdf":
